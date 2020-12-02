@@ -1,4 +1,4 @@
-from PyQt5 import uic
+from Ui import Ui_MainWindow
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
@@ -6,17 +6,18 @@ from random import randrange
 import sys
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("Ui.ui", self)
+        self.setupUi(self)
         self.setGeometry(200, 100, 500, 400)
         self.pushButton.clicked.connect(self.update)
 
     def paintEvent(self, event):
             painter = QPainter(self)
-            painter.setPen(QColor(255, 204, 0))
-            painter.setBrush(QColor(255, 204, 0))
+            r, g, b = randrange(0, 255), randrange(0, 255), randrange(0, 155)
+            painter.setPen(QColor(r, g, b))
+            painter.setBrush(QColor(r, g, b))
             radius = randrange(10, 50)
             if radius > 500 - radius:
                 painter.drawEllipse(QPoint(randrange(500 - radius, radius),
